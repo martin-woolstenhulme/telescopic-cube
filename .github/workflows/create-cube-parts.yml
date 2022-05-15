@@ -1,0 +1,84 @@
+name: Create Part Models
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        description: Name of the artifact for this set of customized parameters
+        required: true
+      size:
+        type: string
+        description: legs dimension in mm (x and y axis)
+        default: 30
+      thickness:
+        type: string
+        description: thickness of the leg walls in mm
+        default: 2
+      height:
+        type: string
+        description: height of the leg in mm (z-axis)
+        default: 180
+      clearance:
+        type: string
+        description: additional space to account for real-world print clearance (know your printer's clearance)
+        default: .2
+      pegSize:
+        type: string
+        description: diameter of the cylinder cut out from the center-line of the leg
+        default: 10
+      pegLength:
+        type: string
+        description: something larger than the leg size, so the peg can be cutout from both sides of the wall along an x or y axis
+        default: 40
+      pegSpacing:
+        type: string
+        description: linear distance between peg holes in mm
+        default: 5
+
+jobs:
+
+  install-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install OpenScad
+        run: sudo apt-get install -y openscad
+
+      - name:
+        run: mkdir -p build
+
+  export-models:
+    needs: install-dependencies
+    strategy:
+      matrix:
+        model:
+          - leg
+          - bracket
+          - bracker-inner
+          - fastener
+          - tool
+          - table-top
+          - top-plate
+
+    - name: Export Model - ${{ matrix.model }}
+      run: |
+        openscad -o build/${{ matrix.model }}.stl \
+          -D defaultSize=${{ inputs.size }} \
+          -D defaultThickness=${{ inputs.thickness }} \
+          -D defaultHeight=${{ inputs.height }} \
+          -D defaultClearance=${{ inputs.clearance }} \
+          -D defaultPegSize=${{ inputs.pegSize }} \
+          -D defaultPegLength=${{ inputs.pegLength }} \
+          -D defaultPegSpacing=${{ inputs.pegSpacing }} \
+          -D 'model="${{ input }}"' \
+          main.scad
+
+upload-artifact:
+  needs: export-models
+
+  steps:
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: build/

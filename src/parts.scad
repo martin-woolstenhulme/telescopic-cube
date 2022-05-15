@@ -211,7 +211,7 @@ module fastener(
 //   pegSize = diameter of the cylinder cut out from the center-line of the leg
 //   pegLength = something larger than the leg size, so the peg can be cutout from both sides of the wall along an x or y axis
 //   pegSpacing = linear distance between peg holes
-module tableTop (
+module table_top (
     size=defaultSize,
     thickness=defaultThickness,
     height=defaultHeight,
@@ -257,7 +257,7 @@ module tableTop (
 //   pegSize = diameter of the cylinder cut out from the center-line of the leg
 //   pegLength = something larger than the leg size, so the peg can be cutout from both sides of the wall along an x or y axis
 //   pegSpacing = linear distance between peg holes
-module topPlate(
+module top_plate(
     size=defaultSize,
     thickness=defaultThickness,
     height=defaultHeight,
