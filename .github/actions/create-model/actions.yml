@@ -1,0 +1,24 @@
+name: Create Model
+
+inputs:
+  model:
+    type: string
+    description: Name of the model to export
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Create Model - ${{ inputs.model }}
+      shell: bash
+      run: |
+        openscad -o build/${{ inputs.model }}.stl \
+          -D defaultSize=${{ env.size }} \
+          -D defaultThickness=${{ env.thickness }} \
+          -D defaultHeight=${{ env.height }} \
+          -D defaultClearance=${{ env.clearance }} \
+          -D defaultPegSize=${{ env.pegSize }} \
+          -D defaultPegLength=${{ env.pegLength }} \
+          -D defaultPegSpacing=${{ env.pegSpacing }} \
+          -D 'model="${{ inputs.model }}"' \
+          main.scad

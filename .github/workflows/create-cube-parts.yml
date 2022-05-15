@@ -1,4 +1,4 @@
-name: Create Part Models
+name: Create Cube Parts
 
 on:
   workflow_dispatch:
@@ -37,49 +37,45 @@ on:
         default: 5
 
 jobs:
-  install-dependencies:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install OpenScad
-        run: |
-          sudo apt-get install -y openscad
-      - name:
-        run: |
-           mkdir -p build
-
   create-models:
     needs: install-dependencies
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        model:
-          - leg
-          - bracket
-          - bracker-inner
-          - fastener
-          - tool
-          - table-top
-          - top-plate
+    env:
+      size: ${{ inputs.size }}
+      thickness: $ {{ inputs.thickness }}
+      height: $ {{ inputs.height }}
+      clearance: $ {{ inputs.clearance }}
+      pegSize: $ {{ inputs.pegSize }}
+      pegLength: $ {{ inputs.pegLength }}
+      pegSpacing: $ {{ inputs.pegSpacing }}
 
     steps:
-      - name: Create Model - ${{ matrix.model }}
-        run: |
-          openscad -o build/${{ matrix.model }}.stl \
-            -D defaultSize=${{ inputs.size }} \
-            -D defaultThickness=${{ inputs.thickness }} \
-            -D defaultHeight=${{ inputs.height }} \
-            -D defaultClearance=${{ inputs.clearance }} \
-            -D defaultPegSize=${{ inputs.pegSize }} \
-            -D defaultPegLength=${{ inputs.pegLength }} \
-            -D defaultPegSpacing=${{ inputs.pegSpacing }} \
-            -D 'model="${{ matrix.model }}"' \
-            main.scad
+      - name: Install OpenScad
+        run: sudo apt-get install -y openscad
+      - run: mkdir -p build
 
-  upload-artifact:
-    needs: create-models
-    runs-on: ubuntu-latest
+      - uses: .github/actions/create-model
+        with:
+          model: leg
+      - uses: .github/actions/create-model
+        with:
+          model: bracket
+      - uses: .github/actions/create-model
+        with:
+          model: bracket-inner
+      - uses: .github/actions/create-model
+        with:
+          model: fastener
+      - uses: .github/actions/create-model
+        with:
+          model: tool
+      - uses: .github/actions/create-model
+        with:
+          model: table-top
+      - uses: .github/actions/create-model
+        with:
+          model: top-plate
 
-    steps:
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ inputs.name }}
