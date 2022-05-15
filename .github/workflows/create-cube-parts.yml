@@ -60,7 +60,12 @@ jobs:
           ref: v1.0.3
           path: ~/.local/share/OpenSCAD/libraries/
 
-      - run: mkdir -p build
+      - run: |
+          ls -al ~/
+          mkdir -p build
+          mkdir -p ~/.local/share/OpenSCAD/libraries/
+          ln -s BOSL/  ~/.local/share/OpenSCAD/libraries/
+
       - uses: ./.github/actions/create-model
         with:
           model: leg
