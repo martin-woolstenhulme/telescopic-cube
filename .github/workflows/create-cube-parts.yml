@@ -64,84 +64,94 @@ jobs:
           env | sort
           ls -al
 
+      - run: |
+          echo 'name: ${{ github.event.inputs.name }}'
+          echo 'size: ${{ github.event.inputs.size }}'
+          echo 'thickness: ${{ github.event.inputs.thickness }}'
+          echo 'height: ${{ github.event.inputs.height }}'
+          echo 'clearance: ${{ github.event.inputs.clearance }}'
+          echo 'pegSize: ${{ github.event.inputs.pegSize }}'
+          echo 'pegLength: ${{ github.event.inputs.pegLength }}'
+          echo 'pegSpacing: ${{ github.event.inputs.pegSpacing }}'
+
       - uses: ./.github/actions/create-model
         with:
           model: leg
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: bracket
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: bracket-inner
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: fastener
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: tool
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: table-top
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: ./.github/actions/create-model
         with:
           model: top-plate
-          size: ${{ inputs.size }}
-          thickness: ${{ inputs.thickness }}
-          height: ${{ inputs.height }}
-          clearance: ${{ inputs.clearance }}
-          pegSize: ${{ inputs.pegSize }}
-          pegLength: ${{ inputs.pegLength }}
-          pegSpacing: ${{ inputs.pegSpacing }}
+          size: ${{ github.event.inputs.size }}
+          thickness: ${{ github.event.inputs.thickness }}
+          height: ${{ github.event.inputs.height }}
+          clearance: ${{ github.event.inputs.clearance }}
+          pegSize: ${{ github.event.inputs.pegSize }}
+          pegLength: ${{ github.event.inputs.pegLength }}
+          pegSpacing: ${{ github.event.inputs.pegSpacing }}
 
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ inputs.name }}
+          name: ${{ github.event.inputs.name }}
           path: build/

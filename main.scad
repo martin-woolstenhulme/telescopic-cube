@@ -1,4 +1,4 @@
-include<src/parts.scad>;
+include <src/parts.scad>
 
 if (model == "leg") leg();
 
