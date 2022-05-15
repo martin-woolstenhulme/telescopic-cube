@@ -59,7 +59,7 @@ jobs:
           ref: 27a2c524f0dffc30257d6ad399e400d8e06c022d
           path: ./BOSL2
 
-    - run: |
+      - run: |
           openscad --version
 
       - uses: ./.github/actions/create-model
