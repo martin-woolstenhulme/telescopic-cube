@@ -60,7 +60,7 @@ jobs:
           unzip v1.0.3.zip -d ~/.local/share/OpenSCAD/libraries/
       - run: mkdir -p build
 
-      - uses: .github/actions/create-model
+      - uses: ./.github/actions/create-model
         with:
           model: leg
       - uses: ./.github/actions/create-model
