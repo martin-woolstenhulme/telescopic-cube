@@ -60,12 +60,17 @@ jobs:
       - name: Install OpenScad
         run: sudo apt-get install -y openscad curl zip
 
+      - run: |
+          mkdir -p build
+          mkdir -p ~/.local/share/OpenSCAD/libraries/
+          env | sort
+
       - name: Install BOSL2
         uses: actions/checkout@v3
         with:
           repository: revarbat/BOSL2
           ref: 2ee2eda14a35d03c030a80ed097ce260160170b0
-          path: BOSL2
+          path: $HOME/.local/share/OpenSCAD/libraries/
 
       - run: |
           mkdir -p build
