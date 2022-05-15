@@ -33,6 +33,7 @@ runs:
     - name: Create Model - ${{ inputs.model }}
       shell: bash
       run: |
+        OPENSCADPATH=./BOSL2 \
         openscad -o build/${{ inputs.model }}.stl \
           -D defaultSize=${{ inputs.size }} \
           -D defaultThickness=${{ inputs.thickness }} \
