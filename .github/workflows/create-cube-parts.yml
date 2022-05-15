@@ -40,13 +40,13 @@ jobs:
   create-models:
     runs-on: ubuntu-latest
     env:
-      size: ${{ inputs.size }}
-      thickness: $ {{ inputs.thickness }}
-      height: $ {{ inputs.height }}
-      clearance: $ {{ inputs.clearance }}
-      pegSize: $ {{ inputs.pegSize }}
-      pegLength: $ {{ inputs.pegLength }}
-      pegSpacing: $ {{ inputs.pegSpacing }}
+      CUBE_SIZE: ${{ inputs.size }}
+      CUBE_THICKNESS: ${{ inputs.thickness }}
+      CUBE_HEIGHT: ${{ inputs.height }}
+      CUBE_CLEARANCE: ${{ inputs.clearance }}
+      CUBE_PEGSIZE: ${{ inputs.pegSize }}
+      CUBE_PEGLENGTH: ${{ inputs.pegLength }}
+      CUBE_PEGSPACING: ${{ inputs.pegSpacing }}
 
     steps:
       - uses: actions/checkout@v3

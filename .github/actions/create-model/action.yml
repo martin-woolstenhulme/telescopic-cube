@@ -13,12 +13,12 @@ runs:
       shell: bash
       run: |
         openscad -o build/${{ inputs.model }}.stl \
-          -D defaultSize=${{ env.size }} \
-          -D defaultThickness=${{ env.thickness }} \
-          -D defaultHeight=${{ env.height }} \
-          -D defaultClearance=${{ env.clearance }} \
-          -D defaultPegSize=${{ env.pegSize }} \
-          -D defaultPegLength=${{ env.pegLength }} \
-          -D defaultPegSpacing=${{ env.pegSpacing }} \
+          -D defaultSize=$CUBE_SIZE \
+          -D defaultThickness=$CUBE_THICKNESS \
+          -D defaultHeight=$CUBE_HEIGHT \
+          -D defaultClearance=$CUBE_CLEARANCE \
+          -D defaultPegSize=$CUBE_PEGSIZE \
+          -D defaultPegLength=$CUBE_PEGLENGTH \
+          -D defaultPegSpacing=$CUBE_PEGSPACING \
           -D 'model="${{ inputs.model }}"' \
           main.scad
