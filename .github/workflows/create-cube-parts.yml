@@ -37,19 +37,19 @@ on:
         default: 5
 
 jobs:
-
   install-dependencies:
     runs-on: ubuntu-latest
-
     steps:
       - name: Install OpenScad
-        run: sudo apt-get install -y openscad
-
+        run: |
+          sudo apt-get install -y openscad
       - name:
-        run: mkdir -p build
+        run: |
+           mkdir -p build
 
-  export-models:
+  create-models:
     needs: install-dependencies
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         model:
@@ -61,24 +61,26 @@ jobs:
           - table-top
           - top-plate
 
-    - name: Export Model - ${{ matrix.model }}
-      run: |
-        openscad -o build/${{ matrix.model }}.stl \
-          -D defaultSize=${{ inputs.size }} \
-          -D defaultThickness=${{ inputs.thickness }} \
-          -D defaultHeight=${{ inputs.height }} \
-          -D defaultClearance=${{ inputs.clearance }} \
-          -D defaultPegSize=${{ inputs.pegSize }} \
-          -D defaultPegLength=${{ inputs.pegLength }} \
-          -D defaultPegSpacing=${{ inputs.pegSpacing }} \
-          -D 'model="${{ input }}"' \
-          main.scad
+    steps:
+      - name: Create Model - ${{ matrix.model }}
+        run: |
+          openscad -o build/${{ matrix.model }}.stl \
+            -D defaultSize=${{ inputs.size }} \
+            -D defaultThickness=${{ inputs.thickness }} \
+            -D defaultHeight=${{ inputs.height }} \
+            -D defaultClearance=${{ inputs.clearance }} \
+            -D defaultPegSize=${{ inputs.pegSize }} \
+            -D defaultPegLength=${{ inputs.pegLength }} \
+            -D defaultPegSpacing=${{ inputs.pegSpacing }} \
+            -D 'model="${{ input }}"' \
+            main.scad
 
-upload-artifact:
-  needs: export-models
+  upload-artifact:
+    needs: create-models
+    runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/upload-artifact@v3
-      with:
-        name: ${{ inputs.name }}
-        path: build/
+    steps:
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.name }}
+          path: build/
