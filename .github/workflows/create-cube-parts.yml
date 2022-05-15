@@ -11,30 +11,37 @@ on:
         type: string
         description: legs dimension in mm (x and y axis)
         default: 30
+        required: true
       thickness:
         type: string
         description: thickness of the leg walls in mm
         default: 2
+        required: true
       height:
         type: string
         description: height of the leg in mm (z-axis)
         default: 180
+        required: true
       clearance:
         type: string
         description: additional space to account for real-world print clearance (know your printer's clearance)
         default: .2
+        required: true
       pegSize:
         type: string
         description: diameter of the cylinder cut out from the center-line of the leg
         default: 10
+        required: true
       pegLength:
         type: string
         description: something larger than the leg size, so the peg can be cutout from both sides of the wall along an x or y axis
         default: 40
+        required: true
       pegSpacing:
         type: string
         description: linear distance between peg holes in mm
         default: 5
+        required: true
 
 jobs:
   create-models:
@@ -58,13 +65,13 @@ jobs:
         with:
           repository: revarbat/BOSL
           ref: v1.0.3
-          path: ~/.local/share/OpenSCAD/libraries/
 
       - run: |
-          ls -al ~/
           mkdir -p build
           mkdir -p ~/.local/share/OpenSCAD/libraries/
           ln -s BOSL/  ~/.local/share/OpenSCAD/libraries/
+          ls -al ~/
+          ls -al
 
       - uses: ./.github/actions/create-model
         with:
