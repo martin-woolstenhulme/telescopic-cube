@@ -60,6 +60,7 @@ jobs:
           path: ./BOSL2
 
       - run: |
+          openscad --version
           mkdir -p build
           env | sort
           ls -al

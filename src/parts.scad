@@ -1,6 +1,6 @@
 include <dimensions.scad>
-use <BOSL2/std.scad>
-use <BOSL2/metric_screws.scad>
+include <BOSL2/std.scad>
+include <BOSL2/metric_screws.scad>
 
 // Module: plate
 // Description:
