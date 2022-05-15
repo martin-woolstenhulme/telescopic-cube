@@ -64,13 +64,6 @@ jobs:
           ref: 2ee2eda14a35d03c030a80ed097ce260160170b0
           path: $HOME/.local/share/OpenSCAD/libraries/
 
-      - run: |
-          mkdir -p build
-          mkdir -p ~/.local/share/OpenSCAD/libraries/
-          ln -s BOSL2/  ~/.local/share/OpenSCAD/libraries/
-          ls -al ~/.local/share/OpenSCAD/libraries/
-          ls -al
-
       - uses: ./.github/actions/create-model
         with:
           model: leg
