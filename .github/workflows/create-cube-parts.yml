@@ -72,7 +72,7 @@ jobs:
             -D defaultPegSize=${{ inputs.pegSize }} \
             -D defaultPegLength=${{ inputs.pegLength }} \
             -D defaultPegSpacing=${{ inputs.pegSpacing }} \
-            -D 'model="${{ input }}"' \
+            -D 'model="${{ matrix.model }}"' \
             main.scad
 
   upload-artifact:
