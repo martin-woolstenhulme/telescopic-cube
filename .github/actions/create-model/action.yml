@@ -30,6 +30,10 @@ runs:
   using: "composite"
 
   steps:
+    - shell: bash
+      run: |
+        mkdir -p build
+
     - name: Create Model - ${{ inputs.model }}
       shell: bash
       run: |

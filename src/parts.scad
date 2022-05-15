@@ -272,13 +272,17 @@ module top_plate(
     reflect_x([size,0,0])
     plate(size,thickness,pegSize);
 
-    reflect_y([0,size,0]) {
-        plate(size,thickness,pegSize);
+    reflect_y([0,size,0])
+    plate(size,thickness,pegSize);
 
-        reflect_x([size,0,0]) {
-            metric_nut(size=nutSize, hole=true, pitch=1.5, flange=3, details=true, center=false);
-            translate([-size,0,0])
-            metric_bolt(headtype="pan", size=boltSize, l=boltLength, details=true, phillips="#2", orient=BOTTOM, anchor=TOP);
+    for (i = [-1:2:1]){
+         for (j = [-2:3:1]) {
+            translate([i*size, (j+1)*size, 0])
+            rotate(90, [0,0,1]){
+                metric_nut(size=nutSize, hole=true, pitch=1.5, flange=3, details=true, center=false);
+                translate([-size,0,0])
+                metric_bolt(headtype="pan", size=boltSize, l=boltLength, details=true, phillips="#2", orient=BOTTOM, anchor=TOP);
+            }
         }
     }
 }

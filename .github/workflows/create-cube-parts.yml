@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install OpenScad
-        run: sudo apt-get install -y openscad curl zip
+        run: sudo apt-get install -y openscad
 
       - name: Install BOSL2
         uses: actions/checkout@v3
@@ -59,21 +59,8 @@ jobs:
           ref: 27a2c524f0dffc30257d6ad399e400d8e06c022d
           path: ./BOSL2
 
-      - run: |
+    - run: |
           openscad --version
-          mkdir -p build
-          env | sort
-          ls -al
-
-      - run: |
-          echo 'name: ${{ github.event.inputs.name }}'
-          echo 'size: ${{ github.event.inputs.size }}'
-          echo 'thickness: ${{ github.event.inputs.thickness }}'
-          echo 'height: ${{ github.event.inputs.height }}'
-          echo 'clearance: ${{ github.event.inputs.clearance }}'
-          echo 'pegSize: ${{ github.event.inputs.pegSize }}'
-          echo 'pegLength: ${{ github.event.inputs.pegLength }}'
-          echo 'pegSpacing: ${{ github.event.inputs.pegSpacing }}'
 
       - uses: ./.github/actions/create-model
         with:
