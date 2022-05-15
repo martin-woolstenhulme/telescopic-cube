@@ -65,12 +65,13 @@ jobs:
         with:
           repository: revarbat/BOSL
           ref: v1.0.3
+          path: BOSL
 
       - run: |
           mkdir -p build
           mkdir -p ~/.local/share/OpenSCAD/libraries/
           ln -s BOSL/  ~/.local/share/OpenSCAD/libraries/
-          ls -al ~/
+          ls -al ~/.local/share/OpenSCAD/libraries/
           ls -al
 
       - uses: ./.github/actions/create-model
