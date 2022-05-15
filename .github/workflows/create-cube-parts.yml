@@ -51,7 +51,12 @@ jobs:
 
     steps:
       - name: Install OpenScad
-        run: sudo apt-get install -y openscad
+        run: sudo apt-get install -y openscad curl zip
+      - name: Install BOSL
+        run: |
+          mkdir -p ~/.local/share/OpenSCAD/libraries/
+          curl -O https://github.com/revarbat/BOSL/archive/refs/tags/v1.0.3.zip
+          unzip v1.0.3.zip -d ~/.local/share/OpenSCAD/libraries/
       - run: mkdir -p build
 
       - uses: .github/actions/create-model
